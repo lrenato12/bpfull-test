@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true, 
   imports: [FormsModule, HttpClientModule],
   templateUrl: './cadastro-cliente.component.html',
-  styleUrls: ['./cadastro-cliente.component.css']
+  styleUrls: ['./cadastro-cliente.component.scss']
 })
 export class CadastroClienteComponent {
   constructor(private http: HttpClient) {}
