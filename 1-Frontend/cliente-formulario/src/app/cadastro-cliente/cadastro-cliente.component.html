@@ -1,1 +1,22 @@
-<p>cadastro-cliente works!</p>
+<div class="form-container">
+    <h2>Cadastro de Cliente</h2>
+    <form (ngSubmit)="onSubmit(clienteForm)" #clienteForm="ngForm">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" ngModel required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" ngModel required>
+        </div>
+        <div class="form-group">
+          <label for="telefone">Telefone:</label>
+          <input type="text" id="telefone" name="telefone" ngModel>
+        </div>
+        <div class="form-group">
+          <label for="endereco">Endereço:</label>
+          <input type="text" id="endereco" name="endereco" ngModel>
+        </div>
+        <button type="submit" [disabled]="!clienteForm.form.valid">Cadastrar</button>
+      </form>
+  </div>
