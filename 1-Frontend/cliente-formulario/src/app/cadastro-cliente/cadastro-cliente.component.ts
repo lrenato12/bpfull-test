@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro-cliente',
   standalone: true, 
-  imports: [FormsModule],
+  imports: [FormsModule, HttpClientModule],
   templateUrl: './cadastro-cliente.component.html',
   styleUrls: ['./cadastro-cliente.component.css']
 })
