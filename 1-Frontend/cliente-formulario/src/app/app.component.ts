@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ClienteFormComponent } from './components/cliente-formulario/cliente-formulario.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  standalone: true,
+  imports: [CommonModule, ClienteFormComponent],
+  template: `<app-cliente-form></app-cliente-form>`,
 })
-export class AppComponent {
-  title = 'cliente-formulario';
-}
+export class AppComponent {}

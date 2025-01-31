@@ -1,0 +1,49 @@
+<div class="container">
+  <h2>Cadastro de Cliente</h2>
+  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+    
+    <label>Nome:</label>
+    <input type="text" formControlName="nome" required />
+
+    <label>Email:</label>
+    <input type="email" formControlName="email" required />
+
+    <label>Telefone:</label>
+    <input type="text" formControlName="telefone" mask="(00) 00000-0000" required />
+
+    <label>Tipo de Documento:</label>
+    <div class="select-container">
+      <select formControlName="tipoDocumento" (change)="tipoDocumento = clienteForm.get('tipoDocumento')?.value; atualizarValidacoes()">
+        <option value="CPF">CPF</option>
+        <option value="CNPJ">CNPJ</option>
+      </select>
+    </div>
+
+    <div *ngIf="tipoDocumento === 'CPF'">
+      <label>CPF:</label>
+      <input type="text" formControlName="cpf" mask="000.000.000-00" required />
+    </div>
+
+    <div *ngIf="tipoDocumento === 'CNPJ'">
+      <label>CNPJ:</label>
+      <input type="text" formControlName="cnpj" mask="00.000.000/0000-00" required />
+    </div>
+
+    <label>CEP:</label>
+    <input type="text" formControlName="cep" (blur)="buscarCep()" mask="00000-000" required />
+
+    <label>Endereço:</label>
+    <input type="text" formControlName="endereco" required />
+
+    <label>Bairro:</label>
+    <input type="text" formControlName="bairro" required />
+
+    <label>Cidade:</label>
+    <input type="text" formControlName="cidade" required />
+
+    <label>Estado:</label>
+    <input type="text" formControlName="estado" required />
+
+    <button type="submit" [disabled]="clienteForm.invalid">Cadastrar</button>
+  </form>
+</div>
