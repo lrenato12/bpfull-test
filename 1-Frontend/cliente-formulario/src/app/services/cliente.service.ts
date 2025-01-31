@@ -6,11 +6,21 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ClienteService {
-  private apiUrl = 'https://localhost:7114/Cliente/Create';
+  private apiUrlCreate = 'https://localhost:7114/Cliente/Create';
+  private apiUrlGetAll  = 'https://localhost:7114/Cliente/GetAll';
+  private apiUrlDelete  = 'https://localhost:7114/Cliente/Delete';
 
   constructor(private http: HttpClient) {}
 
   cadastrarCliente(cliente: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, cliente);
+    return this.http.post<any>(this.apiUrlCreate, cliente);
+  }
+
+  listarClientes(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrlGetAll);
+  }
+
+  excluirCliente(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrlDelete}/${id}`);
   }
 }

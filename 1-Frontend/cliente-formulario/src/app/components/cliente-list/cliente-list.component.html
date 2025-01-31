@@ -1,0 +1,30 @@
+<div class="container">
+  <h2>Lista de Clientes</h2>
+
+  <div *ngIf="mensagem" [ngClass]="{'sucesso': !erro, 'erro': erro}">
+    {{ mensagem }}
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Documento</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.telefone }}</td>
+        <td>{{ cliente.cpf || cliente.cnpj }}</td>
+        <td>
+          <button class="btn-excluir" (click)="excluirCliente(cliente.id)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
