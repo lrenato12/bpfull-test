@@ -1,10 +1,11 @@
 <nav>
-  <ul>
-    <li><a routerLink="/cadastro">Cadastrar Cliente</a></li>
-    <li><a routerLink="/clientes">Listar Clientes</a></li>
+  <div class="logo">📋 Gestão de Clientes</div>
+  <ul class="menu">
+    <li><a routerLink="/cadastro" routerLinkActive="active">Cadastrar Cliente</a></li>
+    <li><a routerLink="/clientes" routerLinkActive="active">Listar Clientes</a></li>
   </ul>
 </nav>
 
-<hr>
-
-<router-outlet></router-outlet>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
