@@ -3,21 +3,24 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CepService } from '../../services/cep.service';
+import { ClienteService } from '../../services/cliente.service';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-cliente-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule, NgxMaskDirective, NgxMaskPipe],
-  providers: [CepService, provideNgxMask()],
+  providers: [CepService, ClienteService, provideNgxMask()],
   templateUrl: './cliente-formulario.component.html',
   styleUrls: ['./cliente-formulario.component.scss']
 })
 export class ClienteFormComponent {
   clienteForm: FormGroup;
   tipoDocumento: 'CPF' | 'CNPJ' = 'CPF';
+  mensagem: string = '';
+  erro: boolean = false;
 
-  constructor(private fb: FormBuilder, private cepService: CepService) {
+  constructor(private fb: FormBuilder, private cepService: CepService, private clienteService: ClienteService) {
     this.clienteForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -65,9 +68,23 @@ export class ClienteFormComponent {
 
   onSubmit(): void {
     if (this.clienteForm.valid) {
-      console.log('Cliente cadastrado:', this.clienteForm.value);
+      const cliente = this.clienteForm.value;
+
+      this.clienteService.cadastrarCliente(cliente).subscribe({
+        next: () => {
+          this.mensagem = 'Cliente cadastrado com sucesso!';
+          this.erro = false;
+          this.clienteForm.reset();
+        },
+        error: (err) => {
+          console.error('Erro ao cadastrar:', err);
+          this.mensagem = 'Erro ao cadastrar cliente. Tente novamente.';
+          this.erro = true;
+        }
+      });
     } else {
-      console.log('Formulário inválido');
+      this.mensagem = 'Preencha todos os campos corretamente.';
+      this.erro = true;
     }
   }
 }

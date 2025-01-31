@@ -45,5 +45,9 @@
     <input type="text" formControlName="estado" required />
 
     <button type="submit" [disabled]="clienteForm.invalid">Cadastrar</button>
+
+    <div *ngIf="mensagem" [ngClass]="{'sucesso': !erro, 'erro': erro}">
+      {{ mensagem }}
+    </div>
   </form>
 </div>

@@ -63,3 +63,15 @@ button:disabled {
 button:hover {
   background-color: #218838;
 }
+
+.sucesso {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.erro {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
