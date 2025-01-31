@@ -1,5 +1,5 @@
 ﻿using bpfull_api.Controllers.Base;
-using bpfull_api.Model.Cliente;
+using bpfull_shared.Model.Cliente;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bpfull_api.Controllers.Cliente;
@@ -29,9 +29,17 @@ public class ClienteController : BaseController
     }
 
     [HttpGet]
-    [Route("CreateGetTest")]
-    public async Task<IActionResult> CreateGetTest()
+    [Route("GetAll")]
+    public async Task<IActionResult> GetAll()
     {
-        return Ok("CreateGetTest - OK");
+        var list = new List<ClienteModel>();
+
+        list.Add(new ClienteModel
+        {
+            Nome = "Name",
+            Email = "teste"
+        });
+
+        return Ok(list);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace bpfull_api.Model.Cliente;
+﻿namespace bpfull_shared.Model.Cliente;
 
 public class ClienteModel
 {
