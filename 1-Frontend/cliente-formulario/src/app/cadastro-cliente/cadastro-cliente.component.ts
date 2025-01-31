@@ -21,7 +21,7 @@ export class CadastroClienteComponent {
         endereco: form.value.endereco
       };
   
-      this.http.post('https://sua-api.com/clientes', cliente)
+      this.http.post('https://localhost:7114/Cliente/Create', cliente)
         .subscribe(response => {
           console.log('Cliente cadastrado com sucesso!', response);
           form.reset();
