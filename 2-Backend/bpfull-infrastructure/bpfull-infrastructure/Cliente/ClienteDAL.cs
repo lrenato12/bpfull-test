@@ -19,7 +19,7 @@ public class ClienteDAL : BaseDAL, IClienteDAL
     }
     #endregion
 
-    public async Task<string> AddCliente(ClienteModel requestModel)
+    public async Task<string> Create(ClienteModel requestModel)
     {
         var sqlBuilder = new StringBuilder();
         var dynamicParameters = new DynamicParameters();
@@ -30,29 +30,18 @@ public class ClienteDAL : BaseDAL, IClienteDAL
         sqlBuilder.AppendLine("     Id VARCHAR(36) ");
         sqlBuilder.AppendLine(" ); ");
 
-        sqlBuilder.AppendLine(" INSERT INTO Cliente ");
-        sqlBuilder.AppendLine("     ( ");
-        sqlBuilder.AppendLine("         Nome ");
-        sqlBuilder.AppendLine("         , Email ");
-        sqlBuilder.AppendLine("     )  ");
-
+        sqlBuilder.AppendLine(" INSERT INTO Cliente ( Nome ) ");
         sqlBuilder.AppendLine(" OUTPUT INSERTED.Id INTO #RowInserted ");
-
-        sqlBuilder.AppendLine(" VALUES ");
-        sqlBuilder.AppendLine("     ( ");
-        sqlBuilder.AppendLine("         @Nome ");
-        sqlBuilder.AppendLine("         , @Email ");
-        sqlBuilder.AppendLine("     )  ");
+        sqlBuilder.AppendLine(" VALUES ( @Nome ) ");
 
         sqlBuilder.AppendLine(" SELECT Id FROM #RowInserted ");
 
         dynamicParameters.Add("@Nome", requestModel.Nome, DbType.AnsiString, ParameterDirection.Input);
-        dynamicParameters.Add("@Email", requestModel.Email, DbType.AnsiString, ParameterDirection.Input);
 
         return await _dbSession.Connection.ExecuteScalarAsync<string>(sqlBuilder.ToString(), dynamicParameters, transaction: _dbSession.Transaction);
     }
 
-    public async Task<IEnumerable<ClienteModel>> GetAllCliente()
+    public async Task<IEnumerable<ClienteModel>> Get()
     {
         var sqlBuilder = new StringBuilder();
         var dynamicParameters = new DynamicParameters();

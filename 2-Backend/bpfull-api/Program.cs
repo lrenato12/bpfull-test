@@ -1,7 +1,10 @@
 using bpfull_api.Middleware;
 using bpfull_core.Cliente;
 using bpfull_infrastructure.Cliente;
+using bpfull_infrastructure.Contato;
 using bpfull_infrastructure.Data;
+using bpfull_infrastructure.Documento;
+using bpfull_infrastructure.Endereco;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +38,9 @@ builder.Services.AddScoped<DbSession>();
 
 builder.Services.AddTransient<IClienteManager, ClienteManager>();
 builder.Services.AddTransient<IClienteDAL, ClienteDAL>();
+builder.Services.AddTransient<IContatoDAL, ContatoDAL>();
+builder.Services.AddTransient<IDocumentoDAL, DocumentoDAL>();
+builder.Services.AddTransient<IEnderecoDAL, EnderecoDAL>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 

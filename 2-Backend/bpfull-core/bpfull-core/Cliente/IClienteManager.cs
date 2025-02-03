@@ -5,6 +5,6 @@ namespace bpfull_core.Cliente;
 
 public interface IClienteManager
 {
-    Task<ApiResultModel> AddCliente(ClienteModel requestModel);
-    Task<ApiResultModel> GetAllCliente();
+    Task<ApiResultModel> Create(ClienteModel requestModel);
+    Task<ApiResultModel> Get();
 }

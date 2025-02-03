@@ -25,22 +25,12 @@ public class ClienteController : BaseController
     #endregion
 
     [HttpPost]
-    [Route("AddCliente")]
-    public async Task<IActionResult> AddCliente([FromBody] ClienteModel requestModel)
-        => Ok(await _clienteManager.AddCliente(requestModel));
+    [Route("Create")]
+    public async Task<IActionResult> Create([FromBody] ClienteModel requestModel)
+        => Ok(await _clienteManager.Create(requestModel));
 
     [HttpGet]
-    [Route("GetAll")]
-    public async Task<IActionResult> GetAll()
-    {
-        var list = new List<ClienteModel>();
-
-        list.Add(new ClienteModel
-        {
-            Nome = "Name",
-            Email = "teste"
-        });
-
-        return Ok(list);
-    }
+    [Route("Get")]
+    public async Task<IActionResult> Get()
+        => Ok(await _clienteManager.Get());
 }
