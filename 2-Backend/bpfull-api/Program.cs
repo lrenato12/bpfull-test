@@ -1,10 +1,12 @@
 using bpfull_api.Middleware;
 using bpfull_core.Cliente;
+using bpfull_core.Mapper;
 using bpfull_infrastructure.Cliente;
 using bpfull_infrastructure.Contato;
 using bpfull_infrastructure.Data;
 using bpfull_infrastructure.Documento;
 using bpfull_infrastructure.Endereco;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +33,8 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Configuration.AddUserSecrets<Program>();
 
+builder.Services.AddAutoMapper(typeof(ClienteProfile));
+builder.Services.AddAutoMapper(typeof(ContatoProfile));
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

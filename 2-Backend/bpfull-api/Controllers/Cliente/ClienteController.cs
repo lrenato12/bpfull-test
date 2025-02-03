@@ -26,7 +26,7 @@ public class ClienteController : BaseController
 
     [HttpPost]
     [Route("Create")]
-    public async Task<IActionResult> Create([FromBody] ClienteModel requestModel)
+    public async Task<IActionResult> Create([FromBody] ClienteRequestModel requestModel)
         => Ok(await _clienteManager.Create(requestModel));
 
     [HttpGet]

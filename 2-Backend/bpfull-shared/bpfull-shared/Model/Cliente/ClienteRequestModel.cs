@@ -2,6 +2,10 @@
 {
     public class ClienteRequestModel
     {
+        public string ClienteId { get; set; }
+        public string ContatoId { get; set; }
+        public string DocumentoId { get; set; }
+        public string EnderecoId { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }
