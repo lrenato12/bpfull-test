@@ -19,10 +19,16 @@ public class ClienteDAL : BaseDAL, IClienteDAL
     }
     #endregion
 
-    public async Task<int> AddCliente(ClienteModel requestModel)
+    public async Task<string> AddCliente(ClienteModel requestModel)
     {
         var sqlBuilder = new StringBuilder();
         var dynamicParameters = new DynamicParameters();
+
+        sqlBuilder.AppendLine(" DROP TABLE IF EXISTS #RowInserted ");
+        sqlBuilder.AppendLine(" CREATE TABLE #RowInserted ");
+        sqlBuilder.AppendLine(" ( ");
+        sqlBuilder.AppendLine("     Id VARCHAR(36) ");
+        sqlBuilder.AppendLine(" ); ");
 
         sqlBuilder.AppendLine(" INSERT INTO Cliente ");
         sqlBuilder.AppendLine("     ( ");
@@ -30,7 +36,7 @@ public class ClienteDAL : BaseDAL, IClienteDAL
         sqlBuilder.AppendLine("         , Email ");
         sqlBuilder.AppendLine("     )  ");
 
-        sqlBuilder.AppendLine(" OUTPUT INSERTED.AnswerId ");
+        sqlBuilder.AppendLine(" OUTPUT INSERTED.Id INTO #RowInserted ");
 
         sqlBuilder.AppendLine(" VALUES ");
         sqlBuilder.AppendLine("     ( ");
@@ -38,10 +44,12 @@ public class ClienteDAL : BaseDAL, IClienteDAL
         sqlBuilder.AppendLine("         , @Email ");
         sqlBuilder.AppendLine("     )  ");
 
-        dynamicParameters.Add("@Nome", requestModel.Email, DbType.Int32, ParameterDirection.Input);
-        dynamicParameters.Add("@Email", requestModel.Estado, DbType.Int32, ParameterDirection.Input);
+        sqlBuilder.AppendLine(" SELECT Id FROM #RowInserted ");
 
-        return await _dbSession.Connection.ExecuteScalarAsync<int>(sqlBuilder.ToString(), dynamicParameters, transaction: _dbSession.Transaction);
+        dynamicParameters.Add("@Nome", requestModel.Nome, DbType.AnsiString, ParameterDirection.Input);
+        dynamicParameters.Add("@Email", requestModel.Email, DbType.AnsiString, ParameterDirection.Input);
+
+        return await _dbSession.Connection.ExecuteScalarAsync<string>(sqlBuilder.ToString(), dynamicParameters, transaction: _dbSession.Transaction);
     }
 
     public async Task<IEnumerable<ClienteModel>> GetAllCliente()

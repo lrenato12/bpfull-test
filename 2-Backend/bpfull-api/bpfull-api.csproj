@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>bpfull_api</RootNamespace>
+    <UserSecretsId>b8015d48-4224-4a96-906b-1804a1a209ca</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\bpfull-core\bpfull-core\bpfull-core.csproj" />
     <ProjectReference Include="..\bpfull-infrastructure\bpfull-infrastructure\bpfull-infrastructure.csproj" />
     <ProjectReference Include="..\bpfull-shared\bpfull-shared\bpfull-shared.csproj" />
   </ItemGroup>

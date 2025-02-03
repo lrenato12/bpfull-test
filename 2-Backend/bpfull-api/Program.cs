@@ -1,4 +1,6 @@
 using bpfull_api.Middleware;
+using bpfull_core.Cliente;
+using bpfull_infrastructure.Cliente;
 using bpfull_infrastructure.Data;
 using Microsoft.OpenApi.Models;
 
@@ -24,11 +26,17 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Minha API", Version = "v1" });
 });
 
+builder.Configuration.AddUserSecrets<Program>();
+
+
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddScoped<DbSession>();
 
+builder.Services.AddTransient<IClienteManager, ClienteManager>();
+builder.Services.AddTransient<IClienteDAL, ClienteDAL>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
 
 var app = builder.Build();
 
