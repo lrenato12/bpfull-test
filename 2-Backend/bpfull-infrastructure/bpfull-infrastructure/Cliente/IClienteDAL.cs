@@ -5,5 +5,5 @@ namespace bpfull_infrastructure.Cliente;
 public interface IClienteDAL
 {
     Task<string> Create(ClienteModel requestModel);
-    Task<IEnumerable<ClienteModel>> Get();
+    Task<IEnumerable<ClienteResponseModel>> Get();
 }

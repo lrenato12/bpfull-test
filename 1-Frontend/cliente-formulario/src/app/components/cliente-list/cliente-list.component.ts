@@ -23,7 +23,7 @@ export class ClienteListComponent implements OnInit {
   carregarClientes(): void {
     this.clienteService.listarClientes().subscribe({
       next: (dados) => {
-        this.clientes = dados;
+        this.clientes = Array.from(dados.apiResultData);
       },
       error: (err) => {
         console.error('Erro ao carregar clientes:', err);

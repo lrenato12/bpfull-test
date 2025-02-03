@@ -1,11 +1,14 @@
 using bpfull_api.Middleware;
 using bpfull_core.Cliente;
 using bpfull_core.Mapper;
+using bpfull_core.Utils.StringFormatter;
+using bpfull_core.Utils.Validator;
 using bpfull_infrastructure.Cliente;
 using bpfull_infrastructure.Contato;
 using bpfull_infrastructure.Data;
 using bpfull_infrastructure.Documento;
 using bpfull_infrastructure.Endereco;
+using bpfull_shared.Model.Cliente;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.OpenApi.Models;
 
@@ -46,6 +49,12 @@ builder.Services.AddTransient<IContatoDAL, ContatoDAL>();
 builder.Services.AddTransient<IDocumentoDAL, DocumentoDAL>();
 builder.Services.AddTransient<IEnderecoDAL, EnderecoDAL>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IStringFormatter, StringFormatter>();
+
+builder.Services.AddScoped<IRequestValidator<ClienteRequestModel>, ClienteRequestValidator>();
+builder.Services.AddScoped<IValidatorCNPJ, ValidadorCnpj>();
+builder.Services.AddScoped<IValidatorCPF, ValidadorCpf>();
+builder.Services.AddScoped<IValidatorEmail, ValidadorEmail>();
 
 
 var app = builder.Build();

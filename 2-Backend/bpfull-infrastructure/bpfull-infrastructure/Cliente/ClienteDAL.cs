@@ -41,13 +41,36 @@ public class ClienteDAL : BaseDAL, IClienteDAL
         return await _dbSession.Connection.ExecuteScalarAsync<string>(sqlBuilder.ToString(), dynamicParameters, transaction: _dbSession.Transaction);
     }
 
-    public async Task<IEnumerable<ClienteModel>> Get()
+    public async Task<IEnumerable<ClienteResponseModel>> Get()
     {
         var sqlBuilder = new StringBuilder();
         var dynamicParameters = new DynamicParameters();
 
-        sqlBuilder.AppendLine(" SELECT * FROM Cliente ");
+        sqlBuilder.AppendLine(" SELECT C.Id ");
+		sqlBuilder.AppendLine("         , C.Nome ");
+		sqlBuilder.AppendLine("         , CT.Email ");
+		sqlBuilder.AppendLine("         , CT.Telefone ");
+        sqlBuilder.AppendLine("         , IIF(CPF IS NOT NULL AND LEN(CPF) = 11, ");
+        sqlBuilder.AppendLine("             CONVERT(VARCHAR, ");
+        sqlBuilder.AppendLine("                 STUFF(STUFF(STUFF(CPF, 4, 0, '.'), 8, 0, '.'), 12, 0, '-') ");
+        sqlBuilder.AppendLine("             ), ");
+        sqlBuilder.AppendLine("             IIF(CNPJ IS NOT NULL AND LEN(CNPJ) = 14, ");
+        sqlBuilder.AppendLine("                 CONVERT(VARCHAR, ");
+        sqlBuilder.AppendLine("                     STUFF(STUFF(STUFF(STUFF(CNPJ, 3, 0, '.'), 7, 0, '.'), 11, 0, '/'), 16, 0, '-') ");
+        sqlBuilder.AppendLine("                 ), ");
+        sqlBuilder.AppendLine("                 NULL) ");
+        sqlBuilder.AppendLine("         ) AS Documento ");
+        sqlBuilder.AppendLine("         , E.CEP ");
+		sqlBuilder.AppendLine("         , E.Endereco ");
+		sqlBuilder.AppendLine("         , E.Bairro ");
+		sqlBuilder.AppendLine("         , E.Cidade ");
+		sqlBuilder.AppendLine("         , E.Estado ");
+		sqlBuilder.AppendLine("         , E.Pais ");
+        sqlBuilder.AppendLine(" FROM Cliente C ");
+        sqlBuilder.AppendLine(" JOIN Contato CT ON CT.ClienteId = C.Id ");
+        sqlBuilder.AppendLine(" JOIN Documento D ON D.ClienteId = C.Id ");
+        sqlBuilder.AppendLine(" JOIN Endereco E ON E.ClienteId = C.Id ");
 
-        return await _dbSession.Connection.QueryAsync<ClienteModel>(sqlBuilder.ToString(), dynamicParameters, transaction: _dbSession.Transaction);
+        return await _dbSession.Connection.QueryAsync<ClienteResponseModel>(sqlBuilder.ToString(), dynamicParameters, transaction: _dbSession.Transaction);
     }
 }

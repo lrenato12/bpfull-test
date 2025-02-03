@@ -22,6 +22,10 @@ export class ClienteFormComponent {
 
   constructor(private fb: FormBuilder, private cepService: CepService, private clienteService: ClienteService) {
     this.clienteForm = this.fb.group({
+      ClienteId: "",
+      ContatoId: "",
+      DocumentoId: "",
+      EnderecoId: "",
       nome: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       telefone: ['', [Validators.required]],
@@ -68,13 +72,24 @@ export class ClienteFormComponent {
 
   onSubmit(): void {
     if (this.clienteForm.valid) {
-      const cliente = this.clienteForm.value;
+      const cliente = this.clienteForm.value;  
 
+      if (cliente.tipoDocumento === 'CPF') {
+        cliente.cnpj = null;
+      } else if (cliente.tipoDocumento === 'CNPJ') {
+        cliente.cpf = null;
+      }
+    
       this.clienteService.cadastrarCliente(cliente).subscribe({
-        next: () => {
-          this.mensagem = 'Cliente cadastrado com sucesso!';
-          this.erro = false;
-          this.clienteForm.reset();
+        next: (response) => {
+          if (response.success) {
+            this.mensagem = 'Cliente cadastrado com sucesso!';
+            this.erro = false;
+            this.clienteForm.reset();
+          } else {
+            this.mensagem = response.error.errorMessage;
+            this.erro = true;
+          }
         },
         error: (err) => {
           console.error('Erro ao cadastrar:', err);
@@ -86,5 +101,5 @@ export class ClienteFormComponent {
       this.mensagem = 'Preencha todos os campos corretamente.';
       this.erro = true;
     }
-  }
+  }  
 }

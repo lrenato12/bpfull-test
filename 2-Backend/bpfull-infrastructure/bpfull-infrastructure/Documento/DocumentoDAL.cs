@@ -48,7 +48,7 @@ public class DocumentoDAL : BaseDAL, IDocumentoDAL
 
         sqlBuilder.AppendLine(" SELECT Id FROM #RowInserted ");
 
-        dynamicParameters.Add("@Nome", requestModel.ClienteId, DbType.AnsiString, ParameterDirection.Input);
+        dynamicParameters.Add("@ClienteId", requestModel.ClienteId, DbType.AnsiString, ParameterDirection.Input);
         dynamicParameters.Add("@CPF", requestModel.CPF, DbType.AnsiString, ParameterDirection.Input);
         dynamicParameters.Add("@CNPJ", requestModel.CNPJ, DbType.AnsiString, ParameterDirection.Input);
 
