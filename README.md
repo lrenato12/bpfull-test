@@ -1,27 +1,20 @@
-Cliente API - Sistema de Cadastro
+# Cliente API - Sistema de Cadastro
 
-Visão Geral
-
+## Visão Geral
 Este projeto é uma API para cadastro e gerenciamento de clientes, permitindo operações como criação e leitura de clientes. A API segue os padrões REST e utiliza .NET no backend com Angular no frontend.
 
-Tecnologias Utilizadas
+## Tecnologias Utilizadas
+- **Backend**: .NET Core
+- **Frontend**: Angular
+- **Banco de Dados**: SQL Server
+- **ORM**: Dapper
+- **Padrão de Projeto**: Unit of Work e Repository Pattern
+- **Injeção de Dependência**: Configurada no `Program.cs`
 
-Backend: .NET Core
+## Estrutura do Projeto
 
-Frontend: Angular
-
-Banco de Dados: SQL Server
-
-ORM: Dapper
-
-Padrão de Projeto: Unit of Work e Repository Pattern
-
-Injeção de Dependência: Configurada no Program.cs
-
-Estrutura do Projeto
-
-Backend
-
+### Backend
+```
 ├── Cliente.API
 │   ├── Controllers
 │   ├── Models
@@ -32,9 +25,10 @@ Backend
 │   ├── Interfaces
 │   ├── Program.cs
 │   ├── Startup.cs
+```
 
-Frontend
-
+### Frontend
+```
 ├── ClienteApp
 │   ├── src
 │   │   ├── app
@@ -43,57 +37,56 @@ Frontend
 │   │   │   ├── models
 │   │   │   ├── app.module.ts
 │   │   │   ├── app.component.ts
+```
 
-Instalação e Configuração
+## Instalação e Configuração
 
-Backend (.NET Core API)
+### Backend (.NET Core API)
+1. Clone o repositório:
+   ```sh
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   ```
+2. Acesse a pasta do backend:
+   ```sh
+   cd Cliente.API
+   ```
+3. Instale as dependências:
+   ```sh
+   dotnet restore
+   ```
+4. Configure a string de conexão no `appsettings.json`:
+   ```json
+   "ConnectionStrings": {
+       "DefaultConnection": "Server=SEU_SERVIDOR;Database=SEU_BANCO;User Id=SEU_USUARIO;Password=SUA_SENHA;"
+   }
+   ```
+5. Execute as migrações e inicialize o banco de dados:
+   ```sh
+   dotnet ef database update
+   ```
+6. Execute a API:
+   ```sh
+   dotnet run
+   ```
 
-Clone o repositório:
+### Frontend (Angular)
+1. Acesse a pasta do frontend:
+   ```sh
+   cd ClienteApp
+   ```
+2. Instale as dependências:
+   ```sh
+   npm install
+   ```
+3. Execute o frontend:
+   ```sh
+   ng serve
+   ```
 
-git clone https://github.com/seu-usuario/seu-repositorio.git
-
-Acesse a pasta do backend:
-
-cd Cliente.API
-
-Instale as dependências:
-
-dotnet restore
-
-Configure a string de conexão no secrets da API:
-
-"ConnectionStrings": {
-    "DefaultConnection": "Server=SEU_SERVIDOR;Database=SEU_BANCO;User Id=SEU_USUARIO;Password=SUA_SENHA;"
-}
-
-Execute as migrações e inicialize o banco de dados:
-
-dotnet ef database update
-
-Execute a API:
-
-dotnet run
-
-Frontend (Angular)
-
-Acesse a pasta do frontend:
-
-cd ClienteApp
-
-Instale as dependências:
-
-npm install
-
-Execute o frontend:
-
-ng serve
-
-Endpoints da API
-
-Criar Cliente
-
-POST /api/clientes
-
+## Endpoints da API
+### Criar Cliente
+**POST** `/api/clientes`
+```json
 {
     "nome": "Luiz Renato",
     "email": "renatim9100@gmail.com",
@@ -106,41 +99,34 @@ POST /api/clientes
     "estado": "SP",
     "pais": "Brasil"
 }
+```
 
-Listar Clientes
+### Listar Clientes
+**GET** `/api/clientes`
 
-GET /api/clientes
+## Principais Funcionalidades
+- Cadastro e validação de clientes
+- Persistência no banco de dados com Dapper
+- Padrão Unit of Work para gerenciar transações
+- Formatação de CPF e CNPJ antes da exibição
+- Injeção de dependência configurada no `Program.cs`
 
-Principais Funcionalidades
+## Contribuição
+1. Fork este repositório
+2. Crie uma branch para sua feature:
+   ```sh
+   git checkout -b minha-feature
+   ```
+3. Commit suas alterações:
+   ```sh
+   git commit -m "Adicionando minha feature"
+   ```
+4. Envie para o repositório remoto:
+   ```sh
+   git push origin minha-feature
+   ```
+5. Abra um Pull Request
 
-Cadastro e validação de clientes
+## Contato
+Para dúvidas ou sugestões, entre em contato via email: `renatim9100@gmail.com`
 
-Persistência no banco de dados com Dapper
-
-Padrão Unit of Work para gerenciar transações
-
-Formatação de CPF e CNPJ antes da exibição
-
-Injeção de dependência configurada no Program.cs
-
-Contribuição
-
-Fork este repositório
-
-Crie uma branch para sua feature:
-
-git checkout -b minha-feature
-
-Commit suas alterações:
-
-git commit -m "Adicionando minha feature"
-
-Envie para o repositório remoto:
-
-git push origin minha-feature
-
-Abra um Pull Request
-
-Contato
-
-Para dúvidas ou sugestões, entre em contato via email: renatim9100@gmail.com
