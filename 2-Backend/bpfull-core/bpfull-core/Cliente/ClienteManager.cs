@@ -16,6 +16,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace bpfull_core.Cliente;
 
+/// <summary>
+/// Classe responsável pelo gerenciamento de clientes, implementando operações de criação e recuperação.
+/// </summary>
 public class ClienteManager : BaseManager, IClienteManager
 {
     #region [ PROPERTIES ]
@@ -30,6 +33,9 @@ public class ClienteManager : BaseManager, IClienteManager
     #endregion
 
     #region [ CONSTRUCTOR ]
+    /// <summary>
+    /// Construtor para inicializar as dependências do ClienteManager.
+    /// </summary>
     public ClienteManager(IHttpContextAccessor httpContextAccessor
         , IClienteDAL clienteDAL
         , IContatoDAL contatoDAL
@@ -52,6 +58,9 @@ public class ClienteManager : BaseManager, IClienteManager
     }
     #endregion
 
+    /// <summary>
+    /// Cria um novo cliente com base no modelo de requisição fornecido.
+    /// </summary>
     public async Task<ApiResultModel> Create(ClienteRequestModel requestModel)
     {
         // Validação do modelo

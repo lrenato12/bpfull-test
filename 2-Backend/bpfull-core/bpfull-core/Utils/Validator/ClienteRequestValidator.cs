@@ -3,12 +3,22 @@ using bpfull_shared.Model.System;
 
 namespace bpfull_core.Utils.Validator;
 
+/// <summary>
+/// Classe responsável pela validação de solicitações do modelo ClienteRequestModel.
+/// Implementa a interface <see cref="IRequestValidator{ClienteRequestModel}"/>.
+/// </summary>
 public class ClienteRequestValidator : IRequestValidator<ClienteRequestModel>
 {
     private readonly IValidatorEmail _emailValidator;
     private readonly IValidatorCPF _cpfValidator;
     private readonly IValidatorCNPJ _cnpjValidator;
 
+    /// <summary>
+    /// Construtor que inicializa os validadores necessários.
+    /// </summary>
+    /// <param name="emailValidator">Validador de e-mail.</param>
+    /// <param name="cpfValidator">Validador de CPF.</param>
+    /// <param name="cnpjValidator">Validador de CNPJ.</param>
     public ClienteRequestValidator(
         IValidatorEmail emailValidator,
         IValidatorCPF cpfValidator,
@@ -19,6 +29,11 @@ public class ClienteRequestValidator : IRequestValidator<ClienteRequestModel>
         _cnpjValidator = cnpjValidator;
     }
 
+    /// <summary>
+    /// Valida a solicitação fornecida e retorna um resultado da validação.
+    /// </summary>
+    /// <param name="requestModel">O modelo de solicitação a ser validado.</param>
+    /// <returns>Um objeto <see cref="ApiResultModel"/> representando o resultado da validação.</returns>
     public ApiResultModel ValidateRequest(ClienteRequestModel requestModel)
     {
         if (string.IsNullOrEmpty(requestModel.Nome))

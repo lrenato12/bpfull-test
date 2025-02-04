@@ -2,6 +2,9 @@
 
 namespace bpfull_shared.Model.System;
 
+/// <summary>
+/// Model for API result model.
+/// </summary>
 public class ApiResultModel
 {
     #region Properties

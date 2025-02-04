@@ -1,5 +1,8 @@
 ﻿namespace bpfull_shared.Model.Contato;
 
+/// <summary>
+/// Model for Contato model.
+/// </summary>
 public class ContatoModel
 {
     public string Id { get; set; }

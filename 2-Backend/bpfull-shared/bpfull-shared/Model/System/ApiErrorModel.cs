@@ -1,5 +1,8 @@
 ﻿namespace bpfull_shared.Model.System;
 
+/// <summary>
+/// Model for API error response.
+/// </summary>
 public class ApiErrorModel
 {
     #region Properties

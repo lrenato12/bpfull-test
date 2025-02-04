@@ -1,5 +1,8 @@
 ﻿namespace bpfull_shared.Model.Endereco;
 
+/// <summary>
+/// Model for Endereco model.
+/// </summary>
 public class EnderecoModel
 {
     public string Id { get; set; }

@@ -1,5 +1,8 @@
 ﻿namespace bpfull_shared.Model.Cliente;
 
+/// <summary>
+/// Model for Cliente response model.
+/// </summary>
 public class ClienteResponseModel
 {
     public Guid? Id { get; set; }

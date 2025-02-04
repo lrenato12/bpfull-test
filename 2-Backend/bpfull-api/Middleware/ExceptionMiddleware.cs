@@ -3,6 +3,9 @@ using System.Net;
 
 namespace bpfull_api.Middleware;
 
+/// <summary>
+/// Middleware para tratamento de exceções em requisições HTTP.
+/// </summary>
 public class ExceptionMiddleware
 {
     #region Properties
@@ -10,6 +13,9 @@ public class ExceptionMiddleware
     #endregion
 
     #region CTOR
+    /// <summary>
+    /// Construtor que aceita um delegador de requisições para encadear o middleware.
+    /// </summary>
     public ExceptionMiddleware(RequestDelegate next)
     {
         _next = next;
@@ -17,6 +23,9 @@ public class ExceptionMiddleware
     #endregion
 
     #region InvokeAsync
+    /// <summary>
+    /// Método que processa a requisição e captura exceções.
+    /// </summary>
     public async Task InvokeAsync(HttpContext httpContext)
     {
         try
@@ -29,14 +38,15 @@ public class ExceptionMiddleware
         }
         catch (Exception e)
         {
-            var erro = e.Message;
-
             await HandleRequestExceptionAsync(httpContext, e);
         }
     }
     #endregion
 
     #region HandleCustomExceptionAsync
+    /// <summary>
+    /// Trata exceções personalizadas e retorna a resposta apropriada.
+    /// </summary>
     private Task HandleCustomExceptionAsync(HttpContext context, CustomExceptionModel ex)
     {
         context.Response.ContentType = "application/json";
@@ -46,6 +56,9 @@ public class ExceptionMiddleware
     #endregion
 
     #region HandleRequestExceptionAsync
+    /// <summary>
+    /// Trata exceções gerais e retorna uma resposta de erro.
+    /// </summary>
     private Task HandleRequestExceptionAsync(HttpContext context, Exception e)
     {
         context.Response.ContentType = "application/json";

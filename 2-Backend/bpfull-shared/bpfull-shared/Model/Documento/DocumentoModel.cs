@@ -1,5 +1,8 @@
 ﻿namespace bpfull_shared.Model.Documento;
 
+/// <summary>
+/// Model for Documento model.
+/// </summary>
 public class DocumentoModel
 {
     public string Id { get; set; }
